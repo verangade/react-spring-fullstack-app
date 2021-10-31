@@ -7,14 +7,19 @@ export default class Contacts extends Component{
     constructor(props){
         super(props);
         this.state = {
-            contacts : [],
+            contacts: [],
         };
     }
 
     componentDidMount(){
-        fetch("http://localhost:8080/getAll")
-        .then(response => response.json())
-        .then(data => this.setState({contacts : data}));
+        fetch('http://localhost:8081/getAll')
+        .then(response => { 
+            if (!response.ok) {
+                throw new Error(response.statusText)
+              }
+            
+            response.json() } )
+        .then(data => this.setState({contacts: data}));
     }
 
     render(){
